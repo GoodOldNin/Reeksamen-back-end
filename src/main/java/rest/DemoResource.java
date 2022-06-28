@@ -162,6 +162,32 @@ public class DemoResource {
 
     //delete
 
+    @DELETE
+    @Path("deleteHouse/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteHouseById(@PathParam("id") int id) {
+        hf.deleteHouse(id);
+        return "{\"removedId\":" + id + "}";
+    }
+
+    @DELETE
+    @Path("deleteTenant/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteTenantById(@PathParam("id") int id) {
+        tf.deleteTenant(id);
+        return "{\"removedId\":" + id + "}";
+    }
+
+    @DELETE
+    @Path("deleteRental/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteRentalById(@PathParam("id") int id) {
+        rf.deleteRental(id);
+        return "{\"removedId\":" + id + "}";
+    }
+
+
+
 
 
 }

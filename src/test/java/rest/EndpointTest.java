@@ -95,6 +95,7 @@ public class EndpointTest {
             House h3 = new House("Langtfra 16", "Lemvig", 4);
 
 
+
             //  int startDate, int endDate, int priceAnnual, int deposit, String contactPerson
             // startDate and endDate are int, will be using DDMMYYYY format.
             Rental r1 = new Rental(01012001, 31122031, 120000, 30000, "Santa");
@@ -417,6 +418,39 @@ public class EndpointTest {
     }
 
     //deletes
+
+    @Test
+    void deleteHouse() {
+        given()
+                .contentType("application/json")
+                .when()
+                .delete("info/deleteHouse/3")
+                .then()
+                .statusCode(200)
+                .body("removedId", equalTo(3));
+    }
+
+    @Test
+    void deleteTenant() {
+        given()
+                .contentType("application/json")
+                .when()
+                .delete("info/deleteTenant/3")
+                .then()
+                .statusCode(200)
+                .body("removedId", equalTo(3));
+    }
+
+    @Test
+    void deleteRental() {
+        given()
+                .contentType("application/json")
+                .when()
+                .delete("info/deleteRental/3")
+                .then()
+                .statusCode(200)
+                .body("removedId", equalTo(3));
+    }
 
 
 
