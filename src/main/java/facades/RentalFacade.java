@@ -70,7 +70,8 @@ public class RentalFacade {
         EntityManager em = emf.createEntityManager();
         try {
             Rental r = new Rental(rental.getStartDate(), rental.getEndDate(), rental.getPriceAnnual(), rental.getDeposit(), rental.getContactPerson());
-            r.setTenants(r.getTenants());
+            r.setTenants(rental.getTenants());
+            r.setHouse(rental.getHouse());
             em.getTransaction().begin();
             em.persist(r);
             em.getTransaction().commit();

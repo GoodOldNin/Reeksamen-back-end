@@ -35,8 +35,8 @@ public class Tenant implements Serializable {
 
 
     @JoinTable(name = "tenants_rentals", joinColumns = {
-            @JoinColumn(name = "rental", referencedColumnName = "id")}, inverseJoinColumns = {
-            @JoinColumn(name = "tenant", referencedColumnName = "id")})
+            @JoinColumn(name = "tenant", referencedColumnName = "id")}, inverseJoinColumns = {
+            @JoinColumn(name = "rental", referencedColumnName = "id")})
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Rental> rentals = new ArrayList<>();
 

@@ -1,19 +1,19 @@
 package rest;
 
-import com.google.gson.Gson;
-import entities.User;
+import com.google.gson.*;
+import entities.*;
+import dtos.*;
+import facades.*;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
+import javax.persistence.EntityNotFoundException;
+import javax.ws.rs.core.*;
+import javax.ws.rs.*;
+
+
 import utils.EMF_Creator;
 
 
@@ -21,6 +21,13 @@ import utils.EMF_Creator;
 public class DemoResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final HouseFacade hf = HouseFacade.getHouseFacade(EMF);
+    private static final RentalFacade rf = RentalFacade.getRentalFacade(EMF);
+    private static final TenantFacade tf = TenantFacade.getTenantFacade(EMF);
+
+
+
     @Context
     private UriInfo context;
 
@@ -66,10 +73,94 @@ public class DemoResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
 
-    //TODO
+    //see all endpoints
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("seeAllHouses")
+    public Response seeAllHousesEndpoint(){
+        return Response.ok().entity(GSON.toJson(hf.seeAllHouses())).build();
+    }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("seeAllTenants")
+    public Response seeAllTenantsEndpoint(){
+        return Response.ok().entity(GSON.toJson(tf.seeAllTenants())).build();
+    }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("seeAllRentals")
+    public Response seeAllRentalsEndpoint(){
+        return Response.ok().entity(GSON.toJson(rf.seeAllRentals())).build();
+    }
+
+    //get by id
+
+    @GET
+    @Path("houses/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHousesById(@PathParam("id") int id) {
+        return Response.ok()
+                .entity(GSON.toJson(hf.getHouseById(id)))
+                .build();
+    }
+
+    @GET
+    @Path("rentals/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRentalsById(@PathParam("id") int id) {
+        return Response.ok()
+                .entity(GSON.toJson(rf.getRentalById(id)))
+                .build();
+    }
+
+    @GET
+    @Path("tenants/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTenantsById(@PathParam("id") int id) {
+        return Response.ok()
+                .entity(GSON.toJson(tf.getTenantById(id)))
+                .build();
+    }
+
+    //create tests
+
+    @POST
+    @Path("houses/add")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createHouse(String jsonContext) {
+        House h = GSON.fromJson(jsonContext, House.class);
+        return Response.ok()
+                .entity(GSON.toJson(hf.createHouse(h)))
+                .build();
+    }
+
+    @POST
+    @Path("rentals/add")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createRental(String jsonContext) {
+        Rental r = GSON.fromJson(jsonContext, Rental.class);
+        return Response.ok()
+                .entity(GSON.toJson(rf.createRental(r)))
+                .build();
+    }
+
+    @POST
+    @Path("tenants/add")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createTenant(String jsonContext) {
+        Tenant t = GSON.fromJson(jsonContext, Tenant.class);
+        return Response.ok()
+                .entity(GSON.toJson(tf.createTenant(t)))
+                .build();
+    }
+
+    //delete
 
 
 

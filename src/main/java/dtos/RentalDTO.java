@@ -1,5 +1,6 @@
 package dtos;
 
+import entities.House;
 import entities.Rental;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ public class RentalDTO {
     private int priceAnnual;
     private int deposit;
     private String contactPerson;
-    private List<TenantDTO> tenantDTOS = new ArrayList<>();
+    private List<TenantDTO> tenants = new ArrayList<>();
+    private HouseDTO house;
+
+
 
     public RentalDTO(int startDate, int endDate, int priceAnnual, int deposit, String contactPerson) {
         this.startDate = startDate;
@@ -37,7 +41,7 @@ public class RentalDTO {
             this.priceAnnual = r.getPriceAnnual();
             this.deposit = r.getDeposit();
             this.contactPerson = r.getContactPerson();
-            this.tenantDTOS = TenantDTO.getDtos(r.getTenants());
+            this.tenants = TenantDTO.getDtos(r.getTenants());
         }
     }
 
@@ -90,25 +94,37 @@ public class RentalDTO {
         this.contactPerson = contactPerson;
     }
 
-    public List<TenantDTO> getTenantDTOS() {
-        return tenantDTOS;
+    public HouseDTO getHouse() {
+        return house;
     }
 
-    public void setTenantDTOS(List<TenantDTO> tenantDTOS) {
-        this.tenantDTOS = tenantDTOS;
+    public void setHouse(HouseDTO house) {
+        this.house = house;
     }
+
+    public List<TenantDTO> getTenants() {
+        return tenants;
+    }
+
+    /*public void setTenantDTOS(List<TenantDTO> tenantDTOS) {           trying addTenants insteed
+        this.tenantDTOS = tenantDTOS;
+    }*/
+
+    public void addTenants(TenantDTO tenants) {
+    this.tenants.add(tenants);}
+
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals (Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RentalDTO rentalDTO = (RentalDTO) o;
-        return id == rentalDTO.id && startDate == rentalDTO.startDate && endDate == rentalDTO.endDate && priceAnnual == rentalDTO.priceAnnual && deposit == rentalDTO.deposit && Objects.equals(contactPerson, rentalDTO.contactPerson) && Objects.equals(tenantDTOS, rentalDTO.tenantDTOS);
+        return id == rentalDTO.id && startDate == rentalDTO.startDate && endDate == rentalDTO.endDate && priceAnnual == rentalDTO.priceAnnual && deposit == rentalDTO.deposit && Objects.equals(contactPerson, rentalDTO.contactPerson) && Objects.equals(tenants, rentalDTO.tenants);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, startDate, endDate, priceAnnual, deposit, contactPerson, tenantDTOS);
+    public int hashCode () {
+        return Objects.hash(id, startDate, endDate, priceAnnual, deposit, contactPerson, tenants);
     }
 
     @Override
@@ -120,7 +136,8 @@ public class RentalDTO {
                 ", priceAnnual=" + priceAnnual +
                 ", deposit=" + deposit +
                 ", contactPerson='" + contactPerson + '\'' +
-                ", tenantDTOS=" + tenantDTOS +
+                ", tenants=" + tenants +
                 '}';
     }
 }
+

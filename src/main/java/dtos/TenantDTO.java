@@ -68,6 +68,8 @@ public class TenantDTO {
         this.job = job;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

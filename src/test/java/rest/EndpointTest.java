@@ -281,6 +281,149 @@ public class EndpointTest {
                 .body("code", equalTo(403))
                 .body("message", equalTo("Not authenticated - do login"));
     }
-        //TODO endpointTESTS
+
+
+    //basic see all tests
+    @Test
+    void seeAllHouses() {
+        login("user_admin", "test");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("info/seeAllHouses").then()
+                .statusCode(200);
+    }
+
+    @Test
+    void seeAllTenants() {
+        login("user_admin", "test");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("info/seeAllTenants").then()
+                .statusCode(200);
+    }
+
+    @Test
+    void seeAllRentals() {
+        login("user_admin", "test");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("info/seeAllRentals").then()
+                .statusCode(200);
+    }
+
+    //basic get by id tests
+    @Test
+    void getHouseById() {
+        login("user_admin", "test");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("info/houses/1").then()
+                .statusCode(200);
+    }
+
+    @Test
+    void getRentalById() {
+        login("user_admin", "test");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("info/rentals/1").then()
+                .statusCode(200);
+    }
+
+    @Test
+    void getTenantById() {
+        login("user_admin", "test");
+        given()
+                .contentType("application/json")
+                .when()
+                .get("info/tenants/1").then()
+                .statusCode(200);
+    }
+
+    //create tests - this is where it gets a little tricky
+
+    @Test
+    void createHouse() {
+        login("user_admin", "test");
+        //String address, String city, int numberOfRooms
+        HouseDTO h1 = new HouseDTO("Mosevej12","Randers",12);
+        String requestBody = GSON.toJson(h1);
+        System.out.println(requestBody);
+        given()
+                .header("Content-type", ContentType.JSON)
+                .and()
+                .body(requestBody)
+                .when()
+                .post("info/houses/add")
+                .then()
+                .assertThat()
+                .body("address", equalTo("Mosevej12"))
+                .body("numberOfRooms", equalTo(12));
+    }
+
+    @Test
+    void createRental() {
+        login("user_admin", "test");
+        //int startDate, int endDate, int priceAnnual, int deposit, String contactPerson
+        RentalDTO r = new RentalDTO(01013000,01014000, 360, 12, "OleBole");
+        //String name, int phone, String job
+        TenantDTO t1 = new TenantDTO(new Tenant("Smølf",12345,"atVæreBlå"));
+        TenantDTO t2 = new TenantDTO(new Tenant("djævel",666,"atVæreRød"));
+        HouseDTO h = new HouseDTO("Mosevej12","Randers",12);
+        r.addTenants(t1);
+        r.addTenants(t2);
+        r.setHouse(h);
+
+
+
+
+        String requestBody = GSON.toJson(r);
+        System.out.println(requestBody);
+        given()
+                .header("Content-type", ContentType.JSON)
+                .and()
+                .body(requestBody)
+                .when()
+                .post("info/rentals/add")
+                .then()
+                .assertThat()
+                .body("startDate", equalTo(01013000))
+                .body("priceAnnual", equalTo(360));
+    }
+
+    @Test
+    void createTenant() {
+        login("user_admin", "test");
+        //String name, int phone, String job
+        TenantDTO t1 = new TenantDTO("Jonas", 77777, "maler");
+
+        String requestBody = GSON.toJson(t1);
+        System.out.println(requestBody);
+        given()
+                .header("Content-type", ContentType.JSON)
+                .and()
+                .body(requestBody)
+                .when()
+                .post("info/tenants/add")
+                .then()
+                .assertThat()
+                .body("name", equalTo("Jonas"))
+                .body("phone", equalTo(77777));
+    }
+
+    //deletes
+
+
+
+
+
+
+
+
 
 }
