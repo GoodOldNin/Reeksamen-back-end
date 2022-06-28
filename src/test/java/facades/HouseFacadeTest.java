@@ -56,8 +56,6 @@ public class HouseFacadeTest {
             User both = new User("user_admin", "test");
             both.addRole(userRole);
             both.addRole(adminRole);
-            User tester = new User("Ole", "test");
-            tester.addRole(userRole);
 
             //   String address, String city, int numberOfRooms
             House h1 = new House("HjemmeVej10", "TorskeBy", 4);
@@ -104,7 +102,6 @@ public class HouseFacadeTest {
 
             em.persist(userRole);
             em.persist(adminRole);
-            em.persist(tester);
             em.persist(user);
             em.persist(admin);
             em.persist(both);
@@ -119,10 +116,6 @@ public class HouseFacadeTest {
             em.persist(h2);
             em.persist(h3);
 
-
-            System.out.println(h1);
-            System.out.println(r1);
-            System.out.println(t1);
             em.getTransaction().commit();
 
         } finally {
