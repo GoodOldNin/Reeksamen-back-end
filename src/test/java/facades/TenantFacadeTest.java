@@ -4,6 +4,7 @@ import dtos.TenantDTO;
 import entities.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -112,5 +113,28 @@ public class TenantFacadeTest {
         } finally {
             em.close();
         }
+    }
+    @Test
+    void seeAllTenants() {
+    }
+
+    @Test
+    void updateTenants() {
+    }
+
+    @Test
+    void deleteTenant() {
+    }
+
+    @Test
+    void createTenant() {
+    }
+
+    @Test
+    void getTenantById() {
+    }
+
+    @Test
+    void showRentalsByTenant() {
     }
 }

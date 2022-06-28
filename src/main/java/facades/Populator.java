@@ -40,11 +40,6 @@ public class Populator {
 
         em.getTransaction().commit();
 
-
-
-        /*em.create(new RenameMeDTO(new Tenant("First 1", "Last 1")));
-        em.create(new RenameMeDTO(new Tenant("First 2", "Last 2")));
-        em.create(new RenameMeDTO(new Tenant("First 3", "Last 3")));*/
     }
     
     public static void main(String[] args) {

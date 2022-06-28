@@ -1,9 +1,13 @@
 package facades;
 
 import dtos.HouseDTO;
+import dtos.RentalDTO;
 import dtos.TenantDTO;
 import entities.House;
+import entities.Rental;
 import entities.Tenant;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -92,11 +96,20 @@ public class TenantFacade {
     }
 
 
-    public TenantDTO showRentalsByTenant(String userName){
+    public List<RentalDTO> showRentalsByTenant(String userName){
         EntityManager em = emf.createEntityManager();
         try {
-            Tenant t = em.find(Tenant.class, userName); //TODO dunno about that one, lets test later
-            return new TenantDTO((t));
+            Tenant t = em.find(Tenant.class, userName);
+            TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r",  Rental.class);
+            List<Rental> rentals = query.getResultList();
+            List<Rental> totalRentals = new ArrayList<>();
+            for (Rental rental : rentals) {
+                if (rental.equals(t)) {
+                    totalRentals.add(rental);
+                }
+            }
+            List<RentalDTO> rdtos = RentalDTO.getDtos(totalRentals);
+            return rdtos;
         }finally {
             em.close();
         }
