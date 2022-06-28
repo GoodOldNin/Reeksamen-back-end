@@ -59,15 +59,15 @@ public class HouseFacadeTest {
 
             //   String address, String city, int numberOfRooms
             House h1 = new House("HjemmeVej10", "TorskeBy", 4);
-            House h2 = new House("Ude vej 12", "Lyngby", 4);
-            House h3 = new House("Langtfra 16", "Lemvig", 4);
+            House h2 = new House("Ude vej 12", "Lyngby", 2);
+            House h3 = new House("Langtfra 16", "Lemvig", 3);
 
 
             //  int startDate, int endDate, int priceAnnual, int deposit, String contactPerson
             // startDate and endDate are int, will be using DDMMYYYY format.
-            Rental r1 = new Rental(01012001, 31122031, 120000, 30000, "Santa");
-            Rental r2 = new Rental(01012011, 10222025, 240000, 60000, "Mette Frederiksen");
-            Rental r3 = new Rental(01012021, 11012028, 360000, 90000, "Bossman");
+            Rental r1 = new Rental(21012001, 31122031, 120000, 30000, "Santa");
+            Rental r2 = new Rental(11012011, 10222025, 240000, 60000, "Mette Frederiksen");
+            Rental r3 = new Rental(31012021, 11012028, 360000, 90000, "Bossman");
 
 
             //    public Tenant(String name, int phone, String job) {
