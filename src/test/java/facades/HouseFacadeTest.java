@@ -135,40 +135,28 @@ public class HouseFacadeTest {
    assertEquals(expected, actual);
    }
 
-        @Test
-        void updateHouses() {
-        }
+    /*@Test
+    void updateHouses() {
 
-        @Test
-        void deleteHouse() {
-        }
+    }
 
-        @Test
-        void createHouse() {
-        }
+    @Test
+    void deleteHouse() {
+    }
 
-        @Test
-        void getHouseById() {
-        }
+    @Test
+    void createHouse() {
+    }
+
+    @Test
+    void getHouseById() {
+    }*/
 
     }
 
 
 
 
-//    @Test
-//    void seeAllMatches() {
-//        System.out.println("seeAllMatches test");
-//        List<MatchDTO> matches = facade.seeAllMatches();
-//        for (MatchDTO m: matches) {
-//            System.out.println(m);
-//        }
-//        int actual = matches.size();
-//        int expected = 2;
-//        assertEquals(expected, actual);
-//    }
-
-    //works locally but messes with deployment
 //    @Test
 //    void updateMatches() {
 //        System.out.println("updateMatches test");

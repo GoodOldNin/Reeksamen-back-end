@@ -57,3 +57,7 @@ optimise - fixes if time (there wont be)-
 
 phonenumber is int... should be long only goes to 9+change digits (10 if first number is 1)
 startDate and endDate are both int. thats a mistake. for ref. i will use DDMMYYYY format.
+
+
+notes:
+164.92.131.129

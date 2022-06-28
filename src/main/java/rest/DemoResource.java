@@ -16,9 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
-/**
- * @author lam@cphbusiness.dk
- */
+
 @Path("info")
 public class DemoResource {
     
@@ -35,7 +33,6 @@ public class DemoResource {
         return "{\"msg\":\"Hello anonymous\"}";
     }
 
-    //Just to verify if the database is setup
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("all")
@@ -68,4 +65,12 @@ public class DemoResource {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
+
+    //TODO
+
+
+
+
+
+
 }
