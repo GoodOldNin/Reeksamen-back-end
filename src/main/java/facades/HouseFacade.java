@@ -28,7 +28,10 @@ public class HouseFacade {
         try {
             TypedQuery<House> query = em.createQuery("SELECT h FROM House h", House.class);
             List<House> houses = query.getResultList();
+            System.out.println("houses:"+houses);
             List<HouseDTO> hdtos = HouseDTO.getDtos(houses);
+            System.out.println("hdtos:"+hdtos);
+
             return hdtos;
         }finally {
             em.close();
