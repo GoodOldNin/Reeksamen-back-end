@@ -114,7 +114,7 @@ public class TenantFacadeTest {
             em.close();
         }
     }
-    @Test
+    /*@Test
     void seeAllTenants() {
     }
 
@@ -136,5 +136,5 @@ public class TenantFacadeTest {
 
     @Test
     void showRentalsByTenant() {
-    }
+    }*/
 }
