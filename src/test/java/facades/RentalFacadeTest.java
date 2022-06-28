@@ -29,8 +29,8 @@ public class RentalFacadeTest {
             em.createQuery("delete from User").executeUpdate();
             em.createQuery("delete from Role").executeUpdate();
 
-            em.createNamedQuery("House.deleteAllRows").executeUpdate();
             em.createNamedQuery("Rental.deleteAllRows").executeUpdate();
+            em.createNamedQuery("House.deleteAllRows").executeUpdate();
             em.createNamedQuery("Tenant.deleteAllRows").executeUpdate();
 
             em.getTransaction().commit();
